@@ -16,6 +16,7 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class MainActivity : AppCompatActivity() {
     //    lateinit var recyclerView: RecyclerView
     private val TAG = "Main Activity"
@@ -53,7 +54,6 @@ class MainActivity : AppCompatActivity() {
 //        recyclerView = findViewById(R.id.recyclerView)
 //        recyclerView.layoutManager = LinearLayoutManager(this)
         checkConnectivity()
-        getTimeFromAndroid()
     }
 
     private fun getDate(date: Long): String {
@@ -71,30 +71,19 @@ class MainActivity : AppCompatActivity() {
         return timeFormatter.format(Date(day * 1000L))
     }
 
-    private fun getTimeFromAndroid(): String {
-        val timeFormatter = SimpleDateFormat("HH:MM a")
-        val time = timeFormatter.format(Date())
+    private fun getCurrentTime(): String {
+        val time = GregorianCalendar()
+        val hour = time.get(Calendar.HOUR_OF_DAY)
 
-//        Toast.makeText(this, time, Toast.LENGTH_SHORT).show()
-
-        if (time >= "00:00 AM" && time <= "11:59 PM") {
-            return "Good Morning"
-//            Toast.makeText(this, "Good Morning", Toast.LENGTH_SHORT).show()
-        } else if (time >= "12:00 PM" && time <= "03:49 PM") {
-            return "Good Afternoon"
-//            Toast.makeText(this, "Good Afternoon", Toast.LENGTH_SHORT).show()
-        } else if (time >= "04:00 PM" && time <= "09:00 PM") {
-            return "Good Evening"
-//            Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show()
-        } else if (time >= "09:00 PM" && time <= "11:59 AM") {
-            return "Good Night"
-//            Toast.makeText(this, "Good Night", Toast.LENGTH_SHORT).show()
+        return when {
+            hour < 12 -> "Good Morning"
+            hour in 12..16 -> "Good Afternoon"
+            else -> "Good Evening"
         }
-        return null.toString()
     }
 
     private fun updateWeather(weatherResponse: WeatherResponse) {
-        greeting.text = getTimeFromAndroid() + ", "
+        greeting.text = getCurrentTime() + ", "
         day.text = getDay(weatherResponse.dt.toLong())
         degreeNo.text = weatherResponse.main.temp.toString() + "°"
         sunrise.text = getTime(weatherResponse.sys.sunrise.toLong())
