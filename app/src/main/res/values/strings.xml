@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Weather App</string>
+    <string name="celcius">Celcius</string>
+    <string name="city">City, </string>
+    <string name="country">Country</string>
+    <string name="n0">N0.</string>
+</resources>
