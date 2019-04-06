@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
     <TextView
@@ -16,27 +16,46 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="50dp"/>
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"/>
+    <TextView
+            android:text=","
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/city"
+            app:layout_constraintBottom_toBottomOf="@id/city"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:id="@+id/textView5"/>
     <TextView
             android:text="@string/country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/country"
-            app:layout_constraintStart_toEndOf="@id/city"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView5"
+            app:layout_constraintTop_toTopOf="@id/city"
             android:textSize="20sp"
             android:textColor="@color/black"/>
-    <TextView
-            android:text="@string/n0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/degree"
+    <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/city"
-            android:layout_marginStart="50dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="80sp"
-            android:layout_marginTop="30sp"/>
+            app:layout_constraintTop_toBottomOf="@id/country"
+            android:layout_marginTop="20dp"/>
+    <!--<TextView-->
+    <!--android:text="@string/n0"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/degree"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@id/city"-->
+    <!--android:layout_marginStart="50dp"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="80sp"-->
+    <!--android:layout_marginTop="30sp"/>-->
 
 </android.support.constraint.ConstraintLayout>

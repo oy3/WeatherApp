@@ -1,8 +1,10 @@
-package com.example.weatherapp
+package com.example.weatherapp.Splash
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.example.weatherapp.MainActivity
+import com.example.weatherapp.R
 import java.lang.Exception
 
 class SplashActivity  : AppCompatActivity() {

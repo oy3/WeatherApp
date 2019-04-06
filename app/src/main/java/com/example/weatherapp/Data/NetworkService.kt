@@ -1,9 +1,7 @@
-package com.example.weatherapp
+package com.example.weatherapp.Data
 
-import com.example.weatherapp.Const.Constants.API_KEY
+import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.Const.Constants.BASE_URL
-import com.example.weatherapp.Const.Constants.city
-import com.example.weatherapp.Data.WeatherResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Callback
