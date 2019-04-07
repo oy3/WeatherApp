@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    <LinearLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,16 +55,16 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:layout_marginStart="50dp"/>
-        <TextView
-                android:text="+"
+                android:layout_marginStart="50dp"
+                android:layout_alignParentStart="true"/>
+        <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView7"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
-    </LinearLayout>
+                app:srcCompat="@android:drawable/ic_input_add"
+                android:id="@+id/imageView3"
+                android:layout_marginEnd="50dp"
+                android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
 
 </android.support.constraint.ConstraintLayout>
