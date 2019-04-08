@@ -42,7 +42,7 @@
                 android:id="@+id/degreeNo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/greeting"
-                android:textSize="100sp"
+                android:textSize="70sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginStart="50dp"

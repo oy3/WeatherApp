@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity(), WeatherAdapter.WeatherSelectionRecycle
             startActivity(Intent(this@MainActivity, CreateCity::class.java))
 
         }
+
+        locationBtn.setOnClickListener{ view ->
+            startActivity(Intent(this@MainActivity, CurrentActivity::class.java))
+        }
     }
 
     private fun showCityDetails(location: Location) {

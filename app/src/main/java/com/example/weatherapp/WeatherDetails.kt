@@ -8,12 +8,12 @@ import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.example.weatherapp.Data.NetworkService
 import com.example.weatherapp.Data.WeatherResponse
 import com.example.weatherapp.Room.Location
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.GrayscaleTransformation
 import kotlinx.android.synthetic.main.weather_details.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -109,7 +109,7 @@ class WeatherDetails : AppCompatActivity() {
     }
 
     private fun updateWeather(weatherResponse: WeatherResponse) {
-        greeting.text = getCurrentTime() + ", "
+        greeting.text = getCurrentTime() + " from "
         day.text = getDay(weatherResponse.dt.toLong())
         degreeNo.text = weatherResponse.main.temp.toString() + "°"
         sunrise.text = getTime(weatherResponse.sys.sunrise.toLong())
@@ -121,6 +121,7 @@ class WeatherDetails : AppCompatActivity() {
         if (weatherResponse.weather.isNotEmpty()) {
             val iconPic = Picasso.with(this)
                 .load("http://openweathermap.org/img/w/${weatherResponse.weather[0].icon}.png")
+//                .transform(GrayscaleTransformation())
                 .into(weatherIcon)
             Log.v(TAG, "Weather icon:$iconPic ")
 
@@ -143,7 +144,7 @@ class WeatherDetails : AppCompatActivity() {
             personName.text = cityIntent.city
 
             val wCity = cityIntent.city
-            val wCountry = cityIntent.country
+            val wCountry =  cityIntent.country
             data["q"] = "$wCity,$wCountry"
             data["units"] = "metric"
             data["appid"] = "fa76a0e2ec6d4703bbf92ba5ac855efe"
