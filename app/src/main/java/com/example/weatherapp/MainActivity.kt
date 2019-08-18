@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), WeatherAdapter.WeatherSelectionRecyclerViewClickListener {
 
     companion object {
-        val INTENT_WEATHER_KEY = "city"
+        const val INTENT_WEATHER_KEY = "city"
     }
 
     override fun cityItemClicked(location: Location) {
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity(), WeatherAdapter.WeatherSelectionRecycle
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 if(isSpinnerTouched){
-//                    Toast.makeText(this@MainActivity, "Selected: " + cityNames[position], Toast.LENGTH_SHORT).show()
                     showCityDetails(cityList[position])
                 }
             }
@@ -74,18 +73,11 @@ class MainActivity : AppCompatActivity(), WeatherAdapter.WeatherSelectionRecycle
                 // Code to perform some action when nothing is selected
             }
         }
-//
-//        recyclerView = findViewById(R.id.recyclerView)
-//        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-//        recyclerView.adapter = WeatherAdapter(cityList, this, this)
 
         cityBtn.setOnClickListener { view ->
             startActivity(Intent(this@MainActivity, CreateCity::class.java))
 
         }
-
-//        locationBtn.setOnClickListener{ view ->
-//            startActivity(Intent(this@MainActivity, CurrentActivity::class.java))
 
         locationBtn.setOnClickListener{ view ->
                 startActivity(Intent(this@MainActivity, CurrentActivity::class.java))
@@ -135,6 +127,6 @@ class MainActivity : AppCompatActivity(), WeatherAdapter.WeatherSelectionRecycle
         this.doubleBackToExitPressedOnce = true
         Toast.makeText(this, "Tap back again to exit", Toast.LENGTH_SHORT).show()
 
-        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 }

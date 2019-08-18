@@ -10,7 +10,7 @@
 
 
     <application
-            android:name="com.example.task.Stetho.SubApplication"
+            android:name=".Stetho.SubApplication"
             android:allowBackup="true"
             android:icon="@mipmap/logo_launcher"
             android:label="@string/app_name"

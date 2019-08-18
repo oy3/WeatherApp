@@ -11,7 +11,7 @@ import com.example.weatherapp.Room.Location
 import com.example.weatherapp.Room.WeatherDatabase
 import kotlinx.android.synthetic.main.create_weather.*
 
-class CreateCity() : AppCompatActivity() {
+class CreateCity : AppCompatActivity() {
 
     private var TAG: String = "CreateCity"
     lateinit var context: Context
@@ -36,15 +36,15 @@ class CreateCity() : AppCompatActivity() {
 
         addBtn.setOnClickListener { view ->
             if (cityTxt.text.isNullOrEmpty() && countryTxt.text.isNullOrEmpty()) {
-                error_mssg.text = "Please input city and country"
+                error_mssg.text = getString(R.string.city_country)
                 city_layout.setHintTextAppearance(R.style.error_appearance)
                 country_layout.setHintTextAppearance(R.style.error_appearance)
             } else if (cityTxt.text.isNullOrBlank()) {
-                error_mssg.text = "Please input city"
+                error_mssg.text = getString(R.string.input_city)
                 city_layout.setHintTextAppearance(R.style.error_appearance)
                 country_layout.setHintTextAppearance(R.style.success_appearance)
             } else if (countryTxt.text.isNullOrEmpty()) {
-                error_mssg.text = "Please input country"
+                error_mssg.text = getString(R.string.input_country)
                 country_layout.setHintTextAppearance(R.style.error_appearance)
                 city_layout.setHintTextAppearance(R.style.success_appearance)
             } else {

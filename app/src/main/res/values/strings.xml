@@ -15,4 +15,9 @@
     <string name="settings">Settings</string>
 
     <string name="select_city">Select City</string>
+    <string name="from">from</string>
+    <string name="direction">n/s SW</string>
+    <string name="city_country">Please input city and country</string>
+    <string name="input_city">Please input city</string>
+    <string name="input_country">Please input country</string>
 </resources>

@@ -13,10 +13,10 @@ class WeatherAdapter(
     var location: List<Location>,
     var context: Context,
     private val clickListener: WeatherSelectionRecyclerViewClickListener
-) : androidx.recyclerview.widget.RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_weather, parent, false)
         return ViewHolder(view)
     }
@@ -25,7 +25,7 @@ class WeatherAdapter(
         return location.size
     }
 
-    override fun onBindViewHolder(holder: WeatherAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.cityList.text = location[position].city
         holder.countryList.text = location[position].country
 
@@ -48,7 +48,7 @@ class WeatherAdapter(
         fun cityItemClicked(location: Location)
     }
 
-    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val cityList = itemView.findViewById(R.id.city) as TextView
         val countryList = itemView.findViewById(R.id.country) as TextView

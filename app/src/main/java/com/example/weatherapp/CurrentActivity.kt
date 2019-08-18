@@ -10,18 +10,17 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.app.ActivityCompat
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.weatherapp.Data.NetworkService
 import com.example.weatherapp.Data.WeatherResponse
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.weather_details.*
 import retrofit2.Call
@@ -37,7 +36,7 @@ class CurrentActivity : AppCompatActivity() {
     lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
 
     private var mFusedLocationClient: FusedLocationProviderClient? = null
-    protected var mLastLocation: Location? = null
+    private var mLastLocation: Location? = null
 
 
 
@@ -45,7 +44,7 @@ class CurrentActivity : AppCompatActivity() {
 
         private val TAG = "LocationProvider"
 
-        private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
+        private const val REQUEST_PERMISSIONS_REQUEST_CODE = 34
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,8 +83,7 @@ class CurrentActivity : AppCompatActivity() {
     }
 
     private fun showSnackbar(
-        mainTextStringId: Int, actionStringId: Int,
-        listener: View.OnClickListener
+        mainTextStringId: Int, listener: View.OnClickListener
     ) {
 
         Toast.makeText(this@CurrentActivity, getString(mainTextStringId), Toast.LENGTH_LONG).show()
@@ -116,11 +114,10 @@ class CurrentActivity : AppCompatActivity() {
         if (shouldProvideRationale) {
             Log.i(TAG, "Displaying permission rationale to provide additional context.")
 
-            showSnackbar(R.string.permission_rationale, android.R.string.ok,
-                View.OnClickListener {
-                    // Request permission
-                    startLocationPermissionRequest()
-                })
+            showSnackbar(R.string.permission_rationale, View.OnClickListener {
+                // Request permission
+                startLocationPermissionRequest()
+            })
 
         } else {
             Log.i(TAG, "Requesting permission")
@@ -134,24 +131,21 @@ class CurrentActivity : AppCompatActivity() {
     ) {
         Log.i(TAG, "onRequestPermissionResult")
         if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
-            if (grantResults.size <= 0) {
-                Log.i(TAG, "User interaction was cancelled.")
-            } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted.
-                getLastLocation()
-            } else {
-                showSnackbar(R.string.permission_denied_explanation, R.string.settings,
-                    View.OnClickListener {
-                        val intent = Intent()
-                        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                        val uri = Uri.fromParts(
-                            "package",
-                            BuildConfig.APPLICATION_ID, null
-                        )
-                        intent.data = uri
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(intent)
-                    })
+            when {
+                grantResults.isEmpty() -> Log.i(TAG, "User interaction was cancelled.")
+                grantResults[0] == PackageManager.PERMISSION_GRANTED -> // Permission granted.
+                    getLastLocation()
+                else -> showSnackbar(R.string.permission_denied_explanation, View.OnClickListener {
+                    val intent = Intent()
+                    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    val uri = Uri.fromParts(
+                        "package",
+                        BuildConfig.APPLICATION_ID, null
+                    )
+                    intent.data = uri
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                })
             }
         }
     }
@@ -200,12 +194,12 @@ class CurrentActivity : AppCompatActivity() {
     }
 
     private fun updateWeather(weatherResponse: WeatherResponse) {
-        greeting.text = getCurrentTime() + " from "
+        greeting.text = getCurrentTime() + getString(R.string.from)
         personName.text = weatherResponse.name
         day.text = getDay(weatherResponse.dt.toLong())
         degreeNo.text = weatherResponse.main.temp.toString() + "°"
         sunrise.text = getTime(weatherResponse.sys.sunrise.toLong())
-        wind.text = weatherResponse.wind.speed.toString() + " n/s SW"
+        wind.text = weatherResponse.wind.speed.toString() + getString(R.string.direction)
         sunset.text = getTime(weatherResponse.sys.sunset.toLong())
         val city = weatherResponse.name
         val country = weatherResponse.sys.country
@@ -239,7 +233,7 @@ class CurrentActivity : AppCompatActivity() {
         return isConnected
     }
 
-    fun getWeatherData(data: HashMap<String, String>) {
+    private fun getWeatherData(data: HashMap<String, String>) {
         service.getWeather(data, callback)
     }
 
