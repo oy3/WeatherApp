@@ -2,7 +2,7 @@ package com.example.weatherapp.Splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
 import java.lang.Exception
@@ -16,7 +16,7 @@ class SplashActivity  : AppCompatActivity() {
         val background = object : Thread() {
             override fun run() {
                 try {
-                    Thread.sleep(1000)
+                    Thread.sleep(3000)
 
                     val intent = Intent(baseContext, MainActivity::class.java)
                     startActivity(intent)

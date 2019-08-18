@@ -2,7 +2,7 @@ package com.example.weatherapp
 
 import android.content.Context
 import android.os.Vibrator
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ class WeatherAdapter(
     var location: List<Location>,
     var context: Context,
     private val clickListener: WeatherSelectionRecyclerViewClickListener
-) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherAdapter.ViewHolder {
@@ -26,11 +26,11 @@ class WeatherAdapter(
     }
 
     override fun onBindViewHolder(holder: WeatherAdapter.ViewHolder, position: Int) {
-        holder.cityList.text = location.get(position).city
-        holder.countryList.text = location.get(position).country
+        holder.cityList.text = location[position].city
+        holder.countryList.text = location[position].country
 
         holder.itemView.setOnClickListener {
-            clickListener.cityItemClicked(location.get(position))
+            clickListener.cityItemClicked(location[position])
 
         }
 
@@ -48,7 +48,7 @@ class WeatherAdapter(
         fun cityItemClicked(location: Location)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         val cityList = itemView.findViewById(R.id.city) as TextView
         val countryList = itemView.findViewById(R.id.country) as TextView

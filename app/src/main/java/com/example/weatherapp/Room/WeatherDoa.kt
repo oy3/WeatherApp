@@ -1,6 +1,6 @@
 package com.example.weatherapp.Room
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
 @Dao
 interface WeatherDoa {

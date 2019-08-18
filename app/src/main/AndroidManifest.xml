@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
 
-
     <application
             android:name="com.example.task.Stetho.SubApplication"
             android:allowBackup="true"
@@ -35,8 +34,10 @@
 
         <activity android:name=".CreateCity"
                   android:parentActivityName=".MainActivity"/>
+
         <activity android:name=".WeatherDetails"
                   android:parentActivityName=".CreateCity"/>
+
         <activity android:name=".CurrentActivity"/>
     </application>
 

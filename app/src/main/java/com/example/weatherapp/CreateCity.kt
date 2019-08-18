@@ -1,17 +1,25 @@
 package com.example.weatherapp
 
-import android.arch.persistence.room.Room
+import android.content.Context
+import androidx.room.Room
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.os.Vibrator
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.example.weatherapp.Room.Location
 import com.example.weatherapp.Room.WeatherDatabase
 import kotlinx.android.synthetic.main.create_weather.*
 
-class CreateCity : AppCompatActivity() {
+class CreateCity() : AppCompatActivity() {
 
     private var TAG: String = "CreateCity"
+    lateinit var context: Context
+
+    private fun vibrate(){
+        val vibratorService = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        vibratorService.vibrate(500)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +39,7 @@ class CreateCity : AppCompatActivity() {
                 error_mssg.text = "Please input city and country"
                 city_layout.setHintTextAppearance(R.style.error_appearance)
                 country_layout.setHintTextAppearance(R.style.error_appearance)
-            } else if (cityTxt.text.isNullOrEmpty()) {
+            } else if (cityTxt.text.isNullOrBlank()) {
                 error_mssg.text = "Please input city"
                 city_layout.setHintTextAppearance(R.style.error_appearance)
                 country_layout.setHintTextAppearance(R.style.success_appearance)
